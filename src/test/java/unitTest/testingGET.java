@@ -25,7 +25,7 @@ public class testingGET {
                         "floor",equalTo(1));
     }
 
-    //To check wheather we are getting data or not
+    //To check weather we are getting data or not
     @Test
     public void extract_data(){
         Response res =given()

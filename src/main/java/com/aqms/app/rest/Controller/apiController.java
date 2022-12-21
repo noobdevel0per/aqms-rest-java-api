@@ -1,9 +1,15 @@
 package com.aqms.app.rest.Controller;
+import com.aqms.app.rest.Exception.ResourceNotFoundException;
 import com.aqms.app.rest.Models.data;
 import com.aqms.app.rest.Repo.dataRepo;
 import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.xml.crypto.Data;
 import java.util.List;
@@ -26,10 +32,12 @@ public class apiController {
         return dataRepo.findAll();
     }
 
-    //get data with specific id
-    @GetMapping(value = "/data/{id}")
-    public Optional<data> getFilteredData(@PathVariable("id")Long id){
-       return  dataRepo.findById(id);
+    // get data by id
+    @GetMapping("/data/{id}")
+    public ResponseEntity<data> getFilteredData(@PathVariable Long id) {
+        data dataSet = dataRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("There is no data with id " + id));
+        return ResponseEntity.ok(dataSet);
     }
 
     //to post the data in API
