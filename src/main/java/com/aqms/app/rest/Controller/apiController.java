@@ -2,24 +2,29 @@ package com.aqms.app.rest.Controller;
 import com.aqms.app.rest.Exception.ResourceNotFoundException;
 import com.aqms.app.rest.Models.data;
 import com.aqms.app.rest.Repo.dataRepo;
-import com.sun.istack.NotNull;
+import com.aqms.app.rest.serviceClass.RandomDataEndpoint;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
-import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import javax.xml.crypto.Data;
 import java.util.List;
-import java.util.Optional;
 
+import javax.print.event.PrintJobAdapter;
 
+@CrossOrigin(origins = "*") //enabling cross-origin resource sharing
 @RestController
 public class apiController {
+
     @Autowired
     private dataRepo dataRepo;
+
+    @Autowired
+    private RandomDataEndpoint rde;
+
 
     @GetMapping(value = "/")
     public String getPage(){
@@ -27,7 +32,7 @@ public class apiController {
     }
 
     //get list of data stored
-    @GetMapping(value = "/data")
+   @GetMapping(value = "/data")
     public List<data> getData(){
         return dataRepo.findAll();
     }
@@ -46,7 +51,6 @@ public class apiController {
         dataRepo.save(data);
         return "Data Saved✔";
     }
-
 
 }
 

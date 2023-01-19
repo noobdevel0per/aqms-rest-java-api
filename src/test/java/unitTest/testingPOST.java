@@ -2,6 +2,7 @@ package unitTest;
 import io.restassured.http.ContentType;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -26,6 +27,7 @@ public class testingPOST {
                 .statusCode(200);
     }
     //Posting data with json OBJECT
+
     @Test
     public void post_by_object() throws JSONException {
         JSONObject body = new JSONObject();

@@ -8,24 +8,28 @@ import java.sql.Timestamp;
 
 
 @Entity
+@Table(name = "data")
 public class data {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //to produce unique id in DB/mysql
     private long id;
     @Column
-    public long o2;
+    private long o2;
     @Column
-    public long co2;
+    private long co2;
     @Column
-    public long so2;
+    private long so2;
     @Column
-    public long co;
+    private long co;
     @Column
-    public long c;
+    private long c;
 
     @Column
-    public int floor;
+    private long airQuality;
+
+    @Column
+    private int floor;
 
     @CreationTimestamp
     @Column(nullable = false,updatable = false)
@@ -34,7 +38,6 @@ public class data {
     @CreationTimestamp
     @Column(nullable = false,updatable = false)
     private Time time;
-
 
     //getter and setters
 
@@ -90,6 +93,29 @@ public class data {
     public int getFloor(){
         return floor;
     }
+
+    public long getAirQuality() {
+        return airQuality;
+    }
+
+    public void setAirQuality(long airQuality) {
+        this.airQuality = airQuality;
+    }
+
+    public data() {
+    }
+    
+    public data(long o2, long co2, long so2, long co, long c, int floor,long airQuality) {
+        
+        this.o2 = o2;
+        this.co2 = co2;
+        this.so2 = so2;
+        this.co = co;
+        this.c = c;
+        this.floor = floor;
+        this.airQuality = airQuality;
+    }
+
     public void setFloor(){
         this.floor = this.floor;
     }
